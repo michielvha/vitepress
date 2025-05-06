@@ -1,0 +1,16 @@
+{
+	"name": "VitePress Development",
+	"image": "node:24",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"Vue.volar"
+			]
+		}
+	},
+	"forwardPorts": [5173],
+	"postCreateCommand": "npm install && npm install vitepress --save-dev",
+	"remoteUser": "node"
+}

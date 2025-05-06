@@ -1,0 +1,21 @@
+{
+  "name": "vitepress-docs",
+  "version": "1.0.0",
+  "description": "VitePress documentation site",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "vitepress",
+    "documentation",
+    "vue"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.4"
+  }
+}
