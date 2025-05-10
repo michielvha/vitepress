@@ -1,6 +1,8 @@
 {
 	"name": "VitePress Development",
-	"image": "node:24",
+    "build": {
+		"dockerfile": "Dockerfile"
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -12,6 +14,5 @@
 	},
 	"forwardPorts": [5173],
 	//"postCreateCommand": "npm install && npm install vitepress --save-dev", only needed on first run, afterwards we use postcreate below.
-	"postCreateCommand": "npm install && npm run docs:dev",
-	"remoteUser": "node"
+	"postCreateCommand": "cd docs && npm install && npm run docs:dev"
 }

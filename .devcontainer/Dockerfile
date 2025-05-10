@@ -1,14 +1,11 @@
-FROM node:24
+FROM node:current-alpine3.21
 
-# Install additional tools
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install git-core curl build-essential \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-
-# Set up global npm packages
+# Install dependencies
 RUN npm install -g @vue/cli typescript
 
-# Set up the working directory
-WORKDIR /workspaces
+WORKDIR /workspaces/vitepress
+
+# Setup: install bash, git, etc. (if needed)
+RUN apk update && apk add --no-cache git bash curl build-base
 
 # The devcontainer.json will handle the rest with postCreateCommand
