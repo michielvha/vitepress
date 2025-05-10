@@ -3,6 +3,7 @@ node_modules/
 
 # VitePress build output
 .vitepress/dist/
+**/.vitpress/chache/**
 
 # Logs
 npm-debug.log*

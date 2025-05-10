@@ -9,6 +9,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN npm install -g @vue/cli typescript
 
 # Set up the working directory
-WORKDIR /workspace
+WORKDIR /workspaces
 
 # The devcontainer.json will handle the rest with postCreateCommand
