@@ -1,7 +1,8 @@
 export default {
-  title: "VitePress Docs",
-  description: "A VitePress documentation site",
+  title: "EdgeForge",
+  description: "A VitePres documentation site",
   themeConfig: {
+    logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },

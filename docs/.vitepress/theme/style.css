@@ -1,0 +1,36 @@
+/* Obsidian dark background and vibrant blue headers */
+:root {
+  --vp-c-bg-2: #181a20; /* obsidian-like */
+  --vp-c-bg: #0e0f13; /* obsidian-like */
+  --vp-c-header-bg: #1e2a47; /* vibrant dark blue */
+  --vp-c-header-text: #036be2; /* vibrant blue for text */
+  --vp-c-brand: #338fff; /* dark blue for active link */
+  --vp-c-brand-light: #60aaff;
+  --vp-c-brand-dark: #1e2a47;
+}
+
+body {
+  background: var(--vp-c-bg);
+}
+
+/* title {
+  background: var(--vp-c-bg-2) !important;
+} */
+
+/* .VPSidebar {
+  background: var(--vp-c-bg-2) !important;
+} */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--vp-c-header-text);
+}
+
+/* NavBar link hover color */
+a.VPLink.link.VPNavBarMenuLink:hover {
+  color: #338fff !important;
+}
+
+/* NavBar active menu link color override */
+a.VPLink.link.VPNavBarMenuLink.active {
+  color: #338fff !important;
+}
