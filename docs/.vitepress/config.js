@@ -6,6 +6,14 @@ export default {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },
+      {
+        text: 'Dropdown Menu',
+        items: [
+          { text: 'Item A', link: '/item-1' },
+          { text: 'Item B', link: '/item-2' },
+          { text: 'Item C', link: '/item-3' }
+        ]
+      }
     ],
     sidebar: [
       {
@@ -17,7 +25,7 @@ export default {
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/edgeforge-labs' }
     ]
   }
 }
