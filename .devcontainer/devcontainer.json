@@ -1,18 +1,21 @@
 {
-	"name": "VitePress Development",
-    "build": {
-		"dockerfile": "Dockerfile"
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode",
-				"Vue.volar"
-			]
-		}
-	},
-	"forwardPorts": [5173],
-	//"postCreateCommand": "npm install && npm install vitepress --save-dev", only needed on first run, afterwards we use postcreate below.
-	"postCreateCommand": "cd docs && npm install && npm run docs:dev"
+  "name": "VitePress Development",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Vue.volar"
+      ]
+    }
+  },
+  "forwardPorts": [5173],
+  //"postCreateCommand": "npm install && npm install vitepress --save-dev", only needed on first run, afterwards we use postcreate below.
+  "postCreateCommand": "cd docs && npm install && npm run docs:dev"
 }
