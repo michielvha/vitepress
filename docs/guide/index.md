@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to the **Edge Forge** documentation!
+Welcome to the **Edgeforge** documentation!
 
 This guide will help you get started with VitePress and show you how to build a powerful documentation site.
 

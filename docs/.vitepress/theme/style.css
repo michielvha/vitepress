@@ -12,11 +12,25 @@
 }
 
 /* body {
-  background: var(--vp-c-bg); /* Current Favorite
+  background: var(--vp-c-bg);
 } */
 
-body {
+/* body {
   background: var(--vp-github-clone);
+} */
+
+body { /* *Gradient from the upper left* */
+  background: radial-gradient(circle at top left, #131b2c, #0a0c10, #050608);
+  min-height: 100vh;
+}
+
+/* body { /* gradient in the middle
+  background: radial-gradient(circle at center, #131b2c, #0a0c10, #050608);
+  min-height: 100vh;
+} */
+
+header-anchor {
+  color: var(--vp-c-header-text);
 }
 
 /* title {

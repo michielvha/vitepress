@@ -1,5 +1,5 @@
 export default {
-  title: "EdgeForge",
+  title: "edgeforge",
   description: "A VitePres documentation site",
   themeConfig: {
     logo: '/logo.png',
