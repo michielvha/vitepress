@@ -1,11 +1,14 @@
 export default {
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   title: "edgeforge",
   description: "A VitePres documentation site",
   themeConfig: {
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
+      { text: 'Docs', link: '/docs/' },
       {
         text: 'Dropdown Menu',
         items: [
@@ -17,10 +20,17 @@ export default {
     ],
     sidebar: [
       {
-        text: 'Guide',
+        text: 'Introduction',
         items: [
-          { text: 'Introduction', link: '/guide/' },
-          { text: 'Getting Started', link: '/guide/getting-started' },
+          { text: 'Introduction', link: '/docs/' },
+          { text: 'Getting Started', link: '/docs/getting-started' },
+        ]
+      },
+      {
+        text: 'edgectl',
+        items: [
+          { text: 'Introduction', link: '/edgectl' },
+          { text: 'Getting Started', link: '/edgectl/getting-started' },
         ]
       }
     ],

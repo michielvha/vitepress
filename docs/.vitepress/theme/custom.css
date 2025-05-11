@@ -1,0 +1,27 @@
+/* Gradient text styling */
+.gradient-text {
+  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+
+/* You can also apply this to specific elements like the site title */
+.VPNavBarTitle .title {
+  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Apply gradient to page title */
+.VPContent .title {
+  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
