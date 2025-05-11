@@ -10,4 +10,4 @@ This site brings together all the moving parts of Edgeforge Labs — projects, t
 
 - **edgecloud** – A scalable edge-cloud platform designed for small form factor devices like SBCs. It's about bringing cloud-native patterns to the edge in a way that feels simple and powerful.
 
-Ready to dive in? Start with the [Getting Started](/guide/getting-started) guide.
+Ready to dive in? Start with the [Getting Started](/docs/getting-started) guide.

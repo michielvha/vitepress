@@ -45,6 +45,15 @@ header-anchor {
   color: var(--vp-c-header-text);
 } */
 
+/* h1 {
+  background: linear-gradient(90deg, #2c5dce 0%, #7952b3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+} */
+
 /* NavBar link hover color */
 a.VPLink.link.VPNavBarMenuLink:hover {
   color: var(--vp-c-header-text) !important;
@@ -55,30 +64,18 @@ a.VPLink.link.VPNavBarMenuLink.active {
   color: var(--vp-c-header-text) !important;
 }
 
-/* Gradient text styling */
-.gradient-text {
-  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
+/* Title gradient style for span.name.clip */
+span.name.clip {
+  background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   display: inline-block;
+  font-weight: bold;
 }
 
-/* Site title gradient */
-.VPNavBarTitle .title {
-  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-/* Page title gradient */
-.VPContent .title {
-  background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
+/* background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%); */
+/* background: linear-gradient(90deg, #013bc3 0%, #7952b3 100%); */
+/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #9966cc 100%); /* nice gradient like edgeforge but less vibrant on the purple */ 
+/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);  /* Perfectly matches our edgeforge gradient */ 

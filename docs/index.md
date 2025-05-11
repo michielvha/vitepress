@@ -2,22 +2,38 @@
 layout: home
 
 hero:
-  name: "VitePress Project"
-  text: "A documentation site built with VitePress"
-  tagline: Fast, simple, and powerful static site generator
+  name: "EdgeForge"
+  text: "An Open Source Edge Native Collective"
+  tagline: Empowering developers to build, deploy, and manage edge-native applications with enterprise-grade reliability
+  image:
+    src: /logo.png
+    alt: EdgeForge Logo
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/
+      link: /docs/
     - theme: alt
       text: View on GitHub
       link: https://github.com/vuejs/vitepress
 
 features:
-  - title: Vue-Powered
-    details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-  - title: Performant
-    details: VitePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
-  - title: Easy Deployment
-    details: Build and directly deploy to GitHub Pages, Netlify, or anywhere you can host static content.
----
+  - title: Cloud-Native Meets Edge
+    details: Our platform leverages Kubernetes for seamless deployment. Deploy containerized workloads with the same tools and practices you use in the cloud.
+    icon: 
+      src: /icons/kubernetes.svg
+      width: 32
+      height: 32
+  - title: Edge-Optimized Architecture
+    details: Purpose-built for resource-constrained environments, EdgeForge delivers cloud capabilities with minimal overhead.
+    icon: 
+      src: /logo.png
+      alt: Performance
+  - title: Powered by Go
+    details: Built with Go's concurrency model and efficient resource utilization, our tools deliver exceptional performance on edge hardware.
+    icon: 
+      src: /icons/go.svg
+      alt: Go Language
+
+
+footer: Copyright © 2023-2025 EdgeForge Labs | Open Source Edge Computing
+lastUpdated: true

@@ -1,6 +1,6 @@
 export default {
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/icons/favicon.ico' }]
   ],
   title: "edgeforge",
   description: "A VitePres documentation site",
@@ -8,12 +8,12 @@ export default {
     logo: '/logo.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/docs/' },
+      { text: 'General', link: '/docs/' },
       {
-        text: 'Dropdown Menu',
+        text: 'Projects',
         items: [
-          { text: 'Item A', link: '/item-1' },
-          { text: 'Item B', link: '/item-2' },
+          { text: 'edge-cloud', link: '/item-1' },
+          { text: 'edgectl', link: '/item-2' },
           { text: 'Item C', link: '/item-3' }
         ]
       }
