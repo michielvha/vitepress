@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "EdgeForge"
   text: "An Open Source Edge Native Collective"
-  tagline: Empowering developers to build, deploy, and manage edge-native applications with enterprise-grade reliability
+  tagline: We turn machines and production lines into smart, connected systems with real-time data, observability, AI and cloud-native tooling
   image:
     src: /logo.png
     alt: EdgeForge Logo
@@ -18,23 +18,25 @@ hero:
 
 features:
   - title: Cloud-Native Meets Edge
-    details: Our platform leverages Kubernetes and GitOps Methodoligies for seamless deployment. Deploy containerized workloads with the same tools and practices you use in the cloud.
+    details: Our platform combines Kubernetes, GitOps methodologies, and rugged edge hardware—big or small—to deliver seamless software deployment and help you unlock hidden potential in your operations.
     icon: 
       src: /icons/kubernetes.svg
 
-  - title: Edge-Optimized Architecture
-    details: Purpose-built for resource-constrained environments, EdgeForge delivers cloud capabilities with minimal overhead.
+  - title: Bridging the gap
+    details: We modernize traditional systems with smart tech that delivers speed, insight, and resilience.
     icon: 
-      src: /icons/kubernetes.svg
-      alt: Performance
-  - title: Powered by Go
-    details: Built with Go's concurrency model and efficient resource utilization, our tools deliver exceptional performance on edge hardware.
+      src: /icons/gap.png
+      alt: Bridging the gap
+      width: 50
+
+  - title: Connect. Automate. Evolve.
+    details: Helping industries upgrade to real-time, data-driven operations—without the complexity.
     icon: 
-      src: /icons/go.svg
-      alt: Go Language
-      width: 120
+      src: /icons/connect.png
+      alt: Connect. Automate. Evolve.
+      width: 50
 
 
 
-footer: Copyright © 2023-2025 EdgeForge Labs | Open Source Edge Computing
+footer: Copyright © 2023-2025 EdgeForge Labs | Open Source Edge Platform
 lastUpdated: true
