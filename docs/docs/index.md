@@ -4,6 +4,14 @@ Welcome to the **Edgeforge** documentation!
 
 This site brings together all the moving parts of Edgeforge Labs — projects, tools, and ideas built around edge computing. Whether you're hacking on edge clusters, writing custom automation, or just exploring what's possible with minimal hardware and maximal creativity, you're in the right place.
 
+## Who are we ?
+
+**Edgeforge offers advanced edge computing solutions that not only make your operational processes smarter and more efficient but also prepare them for the future.**
+
+In an era where digital transformation is becoming increasingly important, Edgeforge brings computing power to where it's truly needed: at the edge of your network, directly at the machines and production equipment.
+
+Our rugged edge systems are designed for demanding industrial environments. They collect, filter, and analyze data right at the source, without needing to send it to a data center or the cloud first. This enables lightning-fast insights and decision-making, even in locations with limited or no internet connectivity.
+
 ## Projects
 
 - **edgectl** – A Golang CLI to automate and manage edge nodes and infrastructure. Built to be portable, `edgectl` works great both interactively and as part of automated workflows.

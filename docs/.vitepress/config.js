@@ -3,7 +3,7 @@ export default {
     ['link', { rel: 'icon', href: '/icons/favicon.ico' }]
   ],
   title: "edgeforge",
-  description: "A VitePres documentation site",
+  description: "Innovating at the Edge",
   themeConfig: {
     logo: '/logo.png',
     nav: [
@@ -14,7 +14,6 @@ export default {
         items: [
           { text: 'edge-cloud', link: '/edge-cloud/' },
           { text: 'edgectl', link: '/item-2' },
-          { text: 'Item C', link: '/item-3' }
         ]
       }
     ],
