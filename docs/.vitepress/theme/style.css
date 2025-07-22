@@ -74,7 +74,7 @@ span.name.clip {
 
 /* Specific h1 header styling for both light and dark modes */
 h1 {
- /* color: #0056b3 !important; /* blue color for h1 in light mode */
+/* color: #0056b3 !important; /* blue color for h1 in light mode */
 }
 
 .dark h1 {
@@ -83,7 +83,7 @@ h1 {
 
 /* Specific h1 header styling for both light and dark modes */
 h2 {
-  color: #0056b3 !important; /* blue color for h2 in light mode */
+/*  color: #0056b3 !important; /* blue color for h2 in light mode */
 }
 
 .dark h2 {

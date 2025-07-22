@@ -9,6 +9,7 @@ export default {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'General', link: '/docs/' },
+      { text: 'About us', link: '/aboutus/' },
       {
         text: 'Projects',
         items: [
