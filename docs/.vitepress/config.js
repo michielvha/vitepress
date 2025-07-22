@@ -19,7 +19,7 @@ export default {
     ],
     sidebar: [
       {
-        text: 'Introduction',
+        text: 'edgeforge',
         items: [
           { text: 'Introduction', link: '/docs/' },
           { text: 'Getting Started', link: '/docs/getting-started' },
