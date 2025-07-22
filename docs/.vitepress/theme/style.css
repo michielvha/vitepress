@@ -1,5 +1,14 @@
-/* Obsidian dark background and vibrant blue headers */
+/* Light mode variables (VitePress defaults will be used, but you can override if needed) */
 :root {
+
+  --vp-c-brand: #007bff; /* primary brand color */
+  --vp-c-brand-light: #66b3ff; /* lighter brand color */
+  --vp-c-brand-dark: #0056b3; /* darker brand color */
+}
+
+
+/* Dark mode variables - scope to dark theme only */
+.dark {
   --vp-c-bg-2: #181a20; /* obsidian-like */
   --vp-c-bg: #0e0f13; /* Current Favorite */
   --vp-c-header-bg: #1e2a47; /* vibrant dark blue */
@@ -11,27 +20,15 @@
   --vp-github-clone: #0a0c10; /* My Clone for github Dark (slightly darker) */
 }
 
-/* body {
-  background: var(--vp-c-bg);
-} */
-
-/* body {
-  background: var(--vp-github-clone);
-} */
-
-body { /* *Gradient from the upper left* */
+/* Apply gradient background only in dark mode */
+.dark body {
   background: radial-gradient(circle at top left, #131b2c, #0a0c10, #050608);
   min-height: 100vh;
 }
 
-/* body { /* gradient in the middle
-  background: radial-gradient(circle at center, #131b2c, #0a0c10, #050608);
-  min-height: 100vh;
-} */
-
-header-anchor {
+/* header-anchor {
   color: var(--vp-c-header-text);
-}
+} */
 
 /* title {
   background: var(--vp-c-bg-2) !important;
@@ -75,7 +72,36 @@ span.name.clip {
   font-weight: bold;
 }
 
+/* Specific h1 header styling for both light and dark modes */
+h1 {
+ /* color: #0056b3 !important; /* blue color for h1 in light mode */
+}
+
+.dark h1 {
+  /* color: #338fff !important;  blue color for h1 in dark mode */
+}
+
+/* Specific h1 header styling for both light and dark modes */
+h2 {
+  color: #0056b3 !important; /* blue color for h2 in light mode */
+}
+
+.dark h2 {
+  /* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  font-weight: bold; */
+}
+
 /* background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%); */
 /* background: linear-gradient(90deg, #013bc3 0%, #7952b3 100%); */
 /* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #9966cc 100%); /* nice gradient like edgeforge but less vibrant on the purple */ 
-/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);  /* Perfectly matches our edgeforge gradient */ 
+/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);  /* Perfectly matches our edgeforge gradient */
+
+/* background: linear-gradient(90deg, #6698ff 0%, #a688fa 100%); */
+/* background: linear-gradient(90deg, #013bc3 0%, #7952b3 100%); */
+/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #9966cc 100%); /* nice gradient like edgeforge but less vibrant on the purple */ 
+/* background: linear-gradient(90deg, #33cccc 0%, #3366ff 50%, #d924ed 100%);  /* Perfectly matches our edgeforge gradient */

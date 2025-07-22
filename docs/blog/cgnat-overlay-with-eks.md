@@ -11,7 +11,7 @@ However, our case is slightly different since we do not use the portal and CLI b
 
 ## AWS VNC Config
 
-We'll be applying a [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html?utm_source=chatgpt.com) network to an existing VPC in AWS. 
+We'll be applying a [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) network to an existing VPC in AWS. 
 
 This will allow us to use a secondary CIDR block for Kubernetes pods thus saving space in our VPC.
 
