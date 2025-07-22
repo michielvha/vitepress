@@ -38,7 +38,3 @@ This project includes a dev container configuration. If you're using VS Code wit
 2. Select "Remote-Containers: Reopen in Container"
 
 This will build and start the development container with all necessary dependencies installed.
-
-## Customizing Your Site
-
-To customize your VitePress site, edit the `.vitepress/config.js` file. You can change the site title, description, and theme settings there.

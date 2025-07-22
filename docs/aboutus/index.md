@@ -2,6 +2,8 @@
 layout: home
 hero:
   name: "EdgeForge"
+
+footer: Copyright © 2023-2025 EdgeForge Labs | Open Source Edge Platform
 ---
 
 This site brings together all the moving parts of **Edgeforge**. You can find details on projects, documentation on tools, and ideas built around edge computing.
@@ -16,12 +18,4 @@ Our rugged edge systems are designed for demanding industrial environments. They
 
 - 📧 **Email:** contact@edgeforge.eu
 - 📱 **Phone:** +32461787878
-
-## Projects
-
-- **edgectl** – A Golang CLI to automate and manage edge nodes and infrastructure. Built to be portable, `edgectl` works great both interactively and as part of automated workflows.
-
-- **edgecloud** – A scalable edge-cloud platform designed for small form factor devices like SBCs. It's about bringing cloud-native patterns to the edge in a way that feels simple and powerful.
-
-Ready to dive in? Start with the [Getting Started](/docs/getting-started) guide.
 

@@ -7,12 +7,12 @@ export default {
   themeConfig: {
     logo: '/logo.png',
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'General', link: '/docs/' },
-      { text: 'About us', link: '/aboutus/' },
+      { text: 'home', link: '/' },
+      { text: 'about us', link: '/aboutus/' },
       {
-        text: 'Projects',
+        text: 'docs',
         items: [
+          { text: 'introduction', link: '/docs/' },
           { text: 'edge-cloud', link: '/edge-cloud/' },
           { text: 'edgectl', link: '/item-2' },
         ]
