@@ -38,6 +38,12 @@ export default {
           { text: 'Introduction', link: '/edge-cloud' },
           { text: 'Getting Started', link: '/edgectl/getting-started' },
         ]
+      },
+      {
+        text: 'blog',
+        items: [
+          { text: 'CGNAT overlay with EKS', link: '/blog/cgnat-overlay-with-eks' },
+        ]
       }
     ],
     socialLinks: [
