@@ -6,8 +6,6 @@ hero:
 
 This site brings together all the moving parts of **Edgeforge**. You can find details on projects, documentation on tools, and ideas built around edge computing.
 
-## Who are we ?
-
 **Edgeforge offers advanced edge computing solutions** that not only make your operational processes smarter and more efficient but also prepare them for the future.
 
 In an era where digital transformation is becoming increasingly important, Edgeforge brings computing power to where it's truly needed: at the edge of your network, directly at the machines and production equipment.
