@@ -2,7 +2,7 @@
 
 Welcome to **Edgeforge**
 
-This site brings together all the moving parts of Edgeforge. You can find details on projects projects, documentation on tools, and ideas built around edge computing.
+This site brings together all the moving parts of Edgeforge. You can find details on projects, documentation on tools, and ideas built around edge computing.
 
 ## Who are we ?
 
