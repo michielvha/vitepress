@@ -34,4 +34,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           project: 'official-website'
           version: ${{ steps.gitversion.outputs.semver }}
+          platform: 'linux/amd64,linux/arm64'
 
