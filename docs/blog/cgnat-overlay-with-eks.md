@@ -1,33 +1,34 @@
-# Carrier-grade NAT overlay network
+# Solving AWS Subnet IP Exhaustion with a CGNAT Overlay Network
 
-to combat ip exhaustion on azure we were using ``azure-cni`` in overlay mode. In AWS we can use a similar approach with CGNAT overlay network.
+We've all been there. You get handed a VPC with a `/24` by the networking team and somehow you're supposed to fit 200 microservices into it. Because of course you are. 
 
-Below is a detailed guide on how to set up a CGNAT overlay network in AWS, allowing you to use a secondary CIDR block for EKS pods, thus saving space in your VPC.
+Fast forward a few sprints, and now Pods won't schedule and subnets are jammed. You asked your Gen-AI/search engine for help, but all you got was a vague wall of AWS docs about “custom networking.” Useless. So let me cut through the fluff: **CGNAT overlay mode** is your way out.
 
-### Reference
+It sticks your pods behind a NAT in a secondary CIDR block, freeing up your main subnets. Pods get IPs, nodes stay happy, and you don’t have to go begging for more VPC space like it’s cloud rationing season.
 
-I originally learned about this from a [YouTube video](https://www.youtube.com/watch?v=ICgj71wmN6E) which provides a comprehensive overview of the process. 
-However, our case is slightly different since we do not use the portal and CLI but terraform and CRD's.
+## Before we get started
 
-## AWS VNC Config
+The techstack described in this blog post contains:
+- Terraform
+- aws eks / VPC
 
-We'll be applying a [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) network to an existing VPC in AWS. 
+### Carrier-grade NAT ?
 
-This will allow us to use a secondary CIDR block for Kubernetes pods thus saving space in our VPC.
+In AWS, [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) mode refers to assigning pod IPs from a secondary CIDR behind NAT, typically from the 100.64.0.0/10 range used by ISPs for large-scale private networking. This keeps your main subnets free and avoids IP exhaustion.
 
-### Add a new CIDR range to the VPC
+## AWS VPC Config
 
-A secondary CIDR block is required to use CG-NAT in AWS. This allows you to create a new range of IP addresses that can be used for your Kubernetes pods.
+We'll **add a secondary CIDR block** to an existing VPC to create an overlay network. This dedicated network range will host our Kubernetes pods.
 
-#### Portal
+### Portal
 
 search VPC -> Select VPC -> Actions -> Edit CIDRs, Add new IPv4 CIDR
 
 ![img_2.png](img/portal1.png)
 
-In this case we cannot use the normal ``100.64.0.0/10`` range because we are bound to use between ``/16`` and ``/28``, so we will settle for ``100.64.0.0/16``
+In our case we cannot use the standard ``100.64.0.0/10`` range because we are bound to use between ``/16`` and ``/28``, so we'll settle for ``100.64.0.0/16``
 
-#### Terraform
+### Terraform
 
 ```hcl
 resource "aws_vpc_ipv4_cidr_block_association" "cgnat_cidr" {
@@ -36,19 +37,19 @@ resource "aws_vpc_ipv4_cidr_block_association" "cgnat_cidr" {
 }
 ```
 
-### Add subnets
+## AWS Subnet Config
 
-an additional subnet needs to be created for each availability zone the K8S cluster is running in. This subnet will be used for the CGNAT overlay network.
+You'll need to create **an additional subnet** in **each availability zone where your Kubernetes cluster is running**. These subnets will host the CGNAT overlay network and provide the dedicated IP space for your pods.
 
-There is a minimum of 2 subnets required, one for each availability zone, To bootstrap a EKS Cluster so we'll need 2 subnets.
+Since EKS requires a minimum of 2 availability zones for cluster bootstrapping, you'll need to create at least 2 CGNAT subnets - one per availability zone.
 
-#### Portal
+### Portal
 
 Select VPC -> Subnets -> Create subnet, select the new CIDR range and create 2 subnets in the same availability zone as the other subnet you will link it to.
 
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
-#### Terraform
+### Terraform
 
 ```hcl
 resource "aws_subnet" "in_pods_eu_west_1b" {
@@ -212,8 +213,9 @@ kubectl set env daemonset aws-node -n kube-system ENI_CONFIG_LABEL_DEF=topology.
 
 ### References
 
-- [CGNAT Overlay Network in AWS](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html?utm_source=chatgpt.com) - Official AWS documentation on setting up a CGNAT overlay network.
+- [CGNAT Overlay Network in AWS](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) - Official AWS documentation on setting up a CGNAT overlay network.
 - [Customize the secondary network interface in Amazon EKS nodes](https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network-tutorial.html) - Tutorial on customizing the secondary network interface in Amazon EKS nodes.
 - [ENIConfig method](https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network-tutorial.html#custom-networking-configure-kubernetes) - This is only supported on managedNodeGroups and selfManagedNodeGroups, not on auto mode.
 - [Amazon Documentation Updates](https://docs.aws.amazon.com/eks/latest/userguide/doc-history.html) - A full list of all changes to the docs, create way to check for new features.
 - [NodeClass CRD Spec](https://docs.aws.amazon.com/eks/latest/userguide/create-node-class.html#auto-node-class-spec)
+- [YouTube video](https://www.youtube.com/watch?v=ICgj71wmN6E) - I originally learned about this from a which provides a comprehensive overview of the process.

@@ -17,5 +17,9 @@
   },
   "forwardPorts": [5173],
   //"postCreateCommand": "npm install && npm install vitepress --save-dev", only needed on first run, afterwards we use postcreate below.
+  "containerEnv": {
+    "CHOKIDAR_USEPOLLING": "true",
+    "WATCHPACK_POLLING": "true"
+  },
   "postCreateCommand": "cd docs && npm install && npm run docs:dev"
 }
