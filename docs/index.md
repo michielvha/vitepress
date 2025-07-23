@@ -14,7 +14,7 @@ hero:
       link: /docs/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/vuejs/vitepress
+      link: https://github.com/edgeforge-labs
 
 features:
   - title: Cloud-Native Meets Edge
