@@ -58,6 +58,16 @@
   backdrop-filter: none !important;
 }
 
+/* Apple-style blur effect for dropdown menus only */
+.dark .VPFlyout .menu,
+.dark .VPMenu {
+  background: rgba(19, 27, 44, 0.15) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(51, 102, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
 /* h1, h2, h3, h4, h5, h6 {
   color: var(--vp-c-header-text);
 } */
