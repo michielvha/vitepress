@@ -13,8 +13,7 @@ export default {
         text: 'docs',
         items: [
           { text: 'introduction', link: '/docs/' },
-          { text: 'edge-cloud', link: '/edge-cloud/' },
-          { text: 'edgectl', link: '/item-2' },
+          { text: 'blog', link: '/blog/' },
         ]
       }
     ],
@@ -23,21 +22,6 @@ export default {
         text: 'edgeforge',
         items: [
           { text: 'Introduction', link: '/docs/' },
-          { text: 'Getting Started', link: '/docs/getting-started' },
-        ]
-      },
-      {
-        text: 'edgectl',
-        items: [
-          { text: 'Introduction', link: '/edgectl' },
-          { text: 'Getting Started', link: '/edgectl/getting-started' },
-        ]
-      },
-      {
-        text: 'edge-cloud',
-        items: [
-          { text: 'Introduction', link: '/edge-cloud' },
-          { text: 'Getting Started', link: '/edgectl/getting-started' },
         ]
       },
       {

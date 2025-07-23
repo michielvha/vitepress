@@ -210,8 +210,6 @@ the spec requires the following:
 - **``subnet``** the subnet ID of the CGNAT overlay subnets created in the previous step. Be sure to use the correct subnet ID for each availability zone.
 - **`securityGroups`** the security group ID of the CGNAT overlay security group created in the previous step. This security group will allow traffic between the pods and the rest of the VPC.
 
-
-
 ## References
 
 - [CGNAT Overlay Network in AWS](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) - Official AWS documentation on setting up a CGNAT overlay network.

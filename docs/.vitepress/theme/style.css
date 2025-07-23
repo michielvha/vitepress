@@ -18,6 +18,11 @@
   --vp-c-brand-dark: #1e2a47;
   --vp-github: #0d1117; /* GitHub dark mode color*/
   --vp-github-clone: #0a0c10; /* My Clone for github Dark (slightly darker) */
+  
+  /* Override navbar background variables to be transparent */
+  --vp-nav-bg-color: transparent;
+  --vp-local-nav-bg-color: transparent;
+  --vp-sidebar-bg-color: #0a0d14;
 }
 
 /* Apply gradient background only in dark mode */
@@ -34,9 +39,24 @@
   background: var(--vp-c-bg-2) !important;
 } */
 
-/* .VPSidebar {
-  background: var(--vp-c-bg-2) !important;
-} */
+/* This sets the color of the sidebar */
+.dark .VPSidebar {
+  background: #0a0d14 !important;
+}
+
+/* Make navbar completely transparent to show background gradient - this removes the standard background that is applied to the header when you navigate to the docs section*/
+.dark .VPNavBar,
+.dark .VPNavBar .container,
+.dark nav,
+.dark header,
+.dark [class*="nav"],
+.dark [class*="Nav"],
+.dark [class*="header"],
+.dark [class*="Header"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
 
 /* h1, h2, h3, h4, h5, h6 {
   color: var(--vp-c-header-text);
