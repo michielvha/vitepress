@@ -5,4 +5,4 @@ RUN npm install -g @vue/cli typescript
 
 # Setup
 RUN apk update && apk add --no-cache git bash curl build-base && \
-    cd docs && npm install && npm run docs:devc
+    cd docs && npm install && npm run docs:build
