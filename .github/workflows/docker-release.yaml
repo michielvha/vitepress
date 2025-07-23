@@ -29,7 +29,7 @@ jobs:
         id: docker-build
         uses: michielvha/docker-release-action@v1
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: edgeforge
           password: ${{ secrets.DOCKER_PASSWORD }}
           project: 'official-website'
           context: '.'
