@@ -169,7 +169,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_outbound" {
 Create an EKS cluster on the normal routable subnets, using the same availability zones where we created the CGNAT overlay subnets.
 
 ::: warning
-This section is only for **managed** and **self-managed nodegroups**. In **auto mode** this feature is available via the [nodeClassObject](../automode/networking/custom-networking/readme.md) with some small differences.
+This section is only for **managed** and **self-managed nodegroups**. In **auto mode** this feature is available via the [nodeClassObject](https://docs.aws.amazon.com/eks/latest/userguide/create-node-class.html#auto-node-class-spec) with some small differences.
 :::
 
 ### aws-node daemonset configuration
