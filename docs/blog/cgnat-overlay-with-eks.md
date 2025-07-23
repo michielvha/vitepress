@@ -6,27 +6,26 @@ Fast forward a few sprints, and now Pods won't schedule and subnets are jammed. 
 
 It sticks your pods behind a NAT in a secondary CIDR block, freeing up your main subnets. Pods get IPs, nodes stay happy, and you don’t have to go begging for more VPC space like it’s cloud rationing season.
 
-## Before we get started
+## Requirements
 
-The techstack described in this blog post contains:
 - Terraform
-- aws eks / VPC
+- AWS VPC / EKS
 
 ### Carrier-grade NAT ?
 
 In AWS, [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) mode refers to assigning pod IPs from a secondary CIDR behind NAT, typically from the 100.64.0.0/10 range used by ISPs for large-scale private networking. This keeps your main subnets free and avoids IP exhaustion.
 
-## AWS VPC Config
+## VPC CIDR Config
 
 We'll **add a secondary CIDR block** to an existing VPC to create an overlay network. This dedicated network range will host our Kubernetes pods.
 
 ### Portal
 
-search VPC -> Select VPC -> Actions -> Edit CIDRs, Add new IPv4 CIDR
+Search for VPC -> Select VPC -> Actions -> Edit CIDRs, then add a new IPv4 CIDR.
 
 ![img_2.png](img/portal1.png)
 
-In our case we cannot use the standard ``100.64.0.0/10`` range because we are bound to use between ``/16`` and ``/28``, so we'll settle for ``100.64.0.0/16``
+In our case, we cannot use the standard `100.64.0.0/10` range because we are restricted to using CIDR blocks between `/16` and `/28`, so we'll settle for `100.64.0.0/16`.
 
 ### Terraform
 
@@ -37,15 +36,15 @@ resource "aws_vpc_ipv4_cidr_block_association" "cgnat_cidr" {
 }
 ```
 
-## AWS Subnet Config
+## VPC Subnet Config
 
-You'll need to create **an additional subnet** in **each availability zone where your Kubernetes cluster is running**. These subnets will host the CGNAT overlay network and provide the dedicated IP space for your pods.
+We'll need to create **an additional subnet** in **each availability zone where our Kubernetes cluster is running**. These subnets will host the CGNAT overlay network and provide the dedicated IP space for our pods.
 
 Since EKS requires a minimum of 2 availability zones for cluster bootstrapping, you'll need to create at least 2 CGNAT subnets - one per availability zone.
 
 ### Portal
 
-Select VPC -> Subnets -> Create subnet, select the new CIDR range and create 2 subnets in the same availability zone as the other subnet you will link it to.
+Navigate to VPC -> Subnets -> Create subnet. Select the new CIDR range and create 2 subnets, ensuring each is placed in the same availability zone as the existing subnets you'll link them to.
 
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
@@ -73,11 +72,9 @@ resource "aws_subnet" "in_pods_eu_west_1c" {
 }
 ```
 
-<!-- 2 subnets on CGNAT ``100.64.0.0/10`` add to current vpc, be sure to add to correct availability zone. -->
+## VPC Routing Config
 
-### Routing configuration
-
-To ensure that the new overlay subnets can communicate with their respective subnet in the same availability zone, we need to set up routing.
+To enable communication between the new overlay subnets and their corresponding subnets in the same availability zones, we need to configure routing.
 
 #### Portal
 
@@ -87,9 +84,9 @@ To ensure that the new overlay subnets can communicate with their respective sub
 
 AWS automatically creates local routes for all CIDR blocks within the same VPC.
 
-When you have multiple CIDR blocks in a VPC (like your 10.x.y.0/24 and 100.64.0.0/16), AWS automatically adds local routes to every route table in that VPC. These local routes enable communication between all subnets within the VPC, regardless of which CIDR block they belong to.
+When we have multiple CIDR blocks in a VPC (like our 10.x.y.0/24 and 100.64.0.0/16), AWS automatically adds local routes to every route table in that VPC. These local routes enable communication between all subnets within the VPC, regardless of which CIDR block they belong to.
 
-You can verify this by checking your route table in the AWS console - you'll see entries like:
+We can verify this by checking our route table in the AWS console - we'll see entries like:
 ```text
 10.x.y.0/24 -> local
 100.64.0.0/16 -> local
@@ -122,18 +119,16 @@ resource "aws_route_table_association" "cgnat_rt_association_1c" {
 }
 ```
 
-<!-- Add routing between cgnat and local lan, if you don't want to use nat gateway. -->
-
-### Security Groups
+## Security Groups Config
 
 Security groups on AWS are placed on ENI (Elastic Network Interface) level.
 We must create a security group for the CGNAT overlay network to allow traffic between the pods and the rest of the VPC.
 
-#### Portal
+### Portal
 
 **TODO**
 
-#### Terraform
+### Terraform
 
 ```hcl
 # Create a security group for the CGNAT overlay network pods
@@ -171,33 +166,11 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_outbound" {
 
 ## Kubernetes configuration
 
-create eks cluster on normal routable lan using the subnets we previously created overlay subnets for.
+Create an EKS cluster on the normal routable subnets, using the same availability zones where we created the CGNAT overlay subnets.
 
-> **NOTE:** This section is only for managed and self-managed nodegroups. In auto mode this feature is available via [nodeClassObject](../automode/networking/custom-networking/readme.md) with some small differences
-
-### ENI Configuration
-
-````yaml
-apiVersion: crd.k8s.amazonaws.com/v1alpha1
-kind: ENIConfig
-metadata:
-  name: eu-west-1c
-spec:
-  subnet: subnet-0aa36b6cfca793d8d
-  securityGroups: [sg-02ecdb3b24e05c1c0]
----
-apiVersion: crd.k8s.amazonaws.com/v1alpha1
-kind: ENIConfig
-metadata:
-  name: eu-west-1b
-spec:
-  subnet: subnet-07b03ff6229b26359
-  securityGroups: [sg-02ecdb3b24e05c1c0]
-````
-
-the spec requires the following:
-- **subnet:** the subnet ID of the CGNAT overlay network subnets created in the previous step. Be sure to use the correct subnet ID for each availability zone.
-- **securityGroups:** the security group ID of the CGNAT overlay network security group created in the previous step. This security group will allow traffic between the pods and the rest of the VPC.
+::: warning
+This section is only for **managed** and **self-managed nodegroups**. In **auto mode** this feature is available via the [nodeClassObject](../automode/networking/custom-networking/readme.md) with some small differences.
+:::
 
 ### aws-node daemonset configuration
 
@@ -211,7 +184,35 @@ kubectl set env daemonset aws-node -n kube-system AWS_VPC_K8S_CNI_CUSTOM_NETWORK
 kubectl set env daemonset aws-node -n kube-system ENI_CONFIG_LABEL_DEF=topology.kubernetes.io/zone
 ````
 
-### References
+### ENI Configuration
+
+We need to configure the Elastic Network Interface attached to our nodes to use the newly created subnets. Again one for each subnet.
+
+````yaml
+apiVersion: crd.k8s.amazonaws.com/v1alpha1
+kind: ENIConfig
+metadata:
+  name: eu-west-1c
+spec:
+  subnet: subnet-xxxxxxxxxxxxxxxx
+  securityGroups: [sg-xxxxxxxxxxxxxxxx]
+---
+apiVersion: crd.k8s.amazonaws.com/v1alpha1
+kind: ENIConfig
+metadata:
+  name: eu-west-1b
+spec:
+  subnet: subnet-xxxxxxxxxxxxxxxx
+  securityGroups: [sg-xxxxxxxxxxxxxxxx]
+````
+
+the spec requires the following:
+- **``subnet``** the subnet ID of the CGNAT overlay subnets created in the previous step. Be sure to use the correct subnet ID for each availability zone.
+- **`securityGroups`** the security group ID of the CGNAT overlay security group created in the previous step. This security group will allow traffic between the pods and the rest of the VPC.
+
+
+
+## References
 
 - [CGNAT Overlay Network in AWS](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) - Official AWS documentation on setting up a CGNAT overlay network.
 - [Customize the secondary network interface in Amazon EKS nodes](https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network-tutorial.html) - Tutorial on customizing the secondary network interface in Amazon EKS nodes.
@@ -219,3 +220,5 @@ kubectl set env daemonset aws-node -n kube-system ENI_CONFIG_LABEL_DEF=topology.
 - [Amazon Documentation Updates](https://docs.aws.amazon.com/eks/latest/userguide/doc-history.html) - A full list of all changes to the docs, create way to check for new features.
 - [NodeClass CRD Spec](https://docs.aws.amazon.com/eks/latest/userguide/create-node-class.html#auto-node-class-spec)
 - [YouTube video](https://www.youtube.com/watch?v=ICgj71wmN6E) - I originally learned about this from a which provides a comprehensive overview of the process.
+
+
