@@ -21,6 +21,7 @@ jobs:
           fetch-depth: 0  # Fetch all history for GitVersion
 
       - name: Tag with GitVersion
+        id: gitversion
         uses: michielvha/gitversion-tag-action@v5
         with:
           configFilePath: 'gitversion.yml'
@@ -32,5 +33,5 @@ jobs:
           username: edgeforge
           password: ${{ secrets.DOCKER_PASSWORD }}
           project: 'official-website'
-          context: '.'
+          version: ${{ steps.gitversion.outputs.semver }}
 
