@@ -14,7 +14,7 @@ hero:
       link: docs/
     - theme: alt
       text: About Us
-      link: aboutus/
+      link: about
 
 features:
   - title: Cloud-Native Meets Edge

@@ -10,7 +10,7 @@ export default {
     logo: '/logo.png',
     nav: [
       { text: 'home', link: '/' },
-      { text: 'about us', link: '/aboutus/' },
+      { text: 'about', link: '/about/' },
       {
         text: 'docs',
         items: [
