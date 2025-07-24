@@ -31,6 +31,9 @@ export default {
         ]
       }
     ],
+    footer: {
+      message: 'Copyright © 2023-2025 EdgeForge'
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/edgeforge-labs' }
     ]

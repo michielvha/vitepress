@@ -38,5 +38,5 @@ features:
 
 
 
-footer: Copyright © 2023-2025 EdgeForge Labs | Open Source Edge Platform
 lastUpdated: true
+---

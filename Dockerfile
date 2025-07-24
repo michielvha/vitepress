@@ -10,8 +10,7 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies and build
-RUN cd docs && \
-    npm install && \
+RUN npm install && \
     npm run docs:build
 
 # Production stage - use nginx to serve static files

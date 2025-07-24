@@ -180,9 +180,13 @@ We need to configure the `aws-node` daemonset to use the CGNAT overlay network. 
 kubectl set env daemonset aws-node -n kube-system AWS_VPC_K8S_CNI_CUSTOM_NETWORK_CFG=true
 ````
 
+This enables custom networking mode . When set to `true`, the CNI will use separate subnets for pod networking instead of the node's subnet. This is the master switch that tells the CNI to look for ENIConfig resources rather than using default behavior where pods share the same subnet as their nodes.
+
 ````shell
 kubectl set env daemonset aws-node -n kube-system ENI_CONFIG_LABEL_DEF=topology.kubernetes.io/zone
 ````
+
+This tells the CNI which node label to use when selecting the appropriate ENIConfig resource. The CNI will look at each node's `topology.kubernetes.io/zone` label value and find an ENIConfig resource whose name matches that zone. 
 
 ### ENI Configuration
 
@@ -216,7 +220,7 @@ the spec requires the following:
 - [Customize the secondary network interface in Amazon EKS nodes](https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network-tutorial.html) - Tutorial on customizing the secondary network interface in Amazon EKS nodes.
 - [ENIConfig method](https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network-tutorial.html#custom-networking-configure-kubernetes) - This is only supported on managedNodeGroups and selfManagedNodeGroups, not on auto mode.
 - [Amazon Documentation Updates](https://docs.aws.amazon.com/eks/latest/userguide/doc-history.html) - A full list of all changes to the docs, create way to check for new features.
-- [NodeClass CRD Spec](https://docs.aws.amazon.com/eks/latest/userguide/create-node-class.html#auto-node-class-spec)
-- [YouTube video](https://www.youtube.com/watch?v=ICgj71wmN6E) - I originally learned about this from a which provides a comprehensive overview of the process.
+- [NodeClass CRD Spec](https://docs.aws.amazon.com/eks/latest/userguide/create-node-class.html#auto-node-class-spec) - Official reference for the CRD Object.
+- [YouTube video](https://www.youtube.com/watch?v=ICgj71wmN6E) - A video that provides a comprehensive overview of the process.
 
 
