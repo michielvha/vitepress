@@ -29,13 +29,10 @@ export default {
       {
         text: 'blog',
         items: [
-          { text: 'CGNAT overlay with EKS', link: '/blog/cgnat-overlay-with-eks' },
+          { text: 'EKS - Carrier Grade NAT overlay', link: '/blog/cgnat-overlay-with-eks' },
         ]
       }
     ],
-    footer: {
-      message: 'Copyright © 2023-2025 EdgeForge'
-    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/edgeforge-labs' }
     ]

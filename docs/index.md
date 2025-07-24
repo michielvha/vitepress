@@ -13,8 +13,8 @@ hero:
       text: Get Started
       link: docs/
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/edgeforge-labs
+      text: About Us
+      link: aboutus/
 
 features:
   - title: Cloud-Native Meets Edge
