@@ -6,7 +6,7 @@ hero:
   text: "An Open Source Edge Native Collective"
   tagline: We turn machines and production lines into smart, connected systems with real-time data, observability, AI and cloud-native tooling
   image:
-    src: logo.png
+    src: /logo.png
     alt: EdgeForge Logo
   actions:
     - theme: brand
