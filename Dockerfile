@@ -1,4 +1,4 @@
-FROM node:current-alpine3.21
+FROM node:current-alpine3.21 AS builder
 
 # Install system dependencies
 RUN apk update && apk add --no-cache git bash curl build-base
@@ -14,8 +14,17 @@ RUN cd docs && \
     npm install && \
     npm run docs:build
 
-# Expose the port VitePress preview uses
-EXPOSE 4173
+# Production stage - use nginx to serve static files
+FROM nginx:alpine
 
-# Set the entrypoint to serve the built site
-ENTRYPOINT ["npm", "run", "docs:preview", "--", "--host", "0.0.0.0", "--port", "4173"]
+# Copy the built site from builder stage
+COPY --from=builder /app/docs/.vitepress/dist /usr/share/nginx/html
+
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
