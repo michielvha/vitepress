@@ -1,6 +1,6 @@
 export default {
   head: [
-    ['link', { rel: 'icon', href: '/icons/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   title: "edgeforge",
   description: "Innovating at the Edge",
