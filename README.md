@@ -13,10 +13,16 @@ docker run -p 8080:80 edgeforge-app -d
 
 ## Blogs
 
-- Gitversion
-  - Custom action how to use and demo
+Below are all the topics I have previously investigated that should be turned into blog posts.
+
 - RootApps & Kustomize
+  - finalizers (cleanup or remove apps when argocd goes down)
+  - best practices
 - ArgoCD integration with azurekeyvault for auto join - same for when we do the one for AWS.
-- Openshift
+- Openshift, setup of aro ? custom terraform module could be great to share...
 - the post deployment stuff external secrets with workload identities etc etc
 - Crossplane / Kyverno / ACK etc etc
+  - delve into platform engineering and the different tools.
+- All the pipeline templates of azuredevops and all the custom actions.
+  - Gitversion
+    - Custom action how to use and demo
