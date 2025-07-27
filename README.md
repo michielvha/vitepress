@@ -26,3 +26,4 @@ Below are all the topics I have previously investigated that should be turned in
 - All the pipeline templates of azuredevops and all the custom actions.
   - Gitversion
     - Custom action how to use and demo
+- usefull K8S debug tips like remove finalizers with force method etc etc.
