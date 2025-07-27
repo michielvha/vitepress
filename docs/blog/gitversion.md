@@ -6,17 +6,19 @@ Every project needs a solid versioning strategy. I’ve been using [GitVersion][
 
 ## Techstack
 
+The following technologies are describes in this article:
+
 - Gitversion 6+
 - Azure DevOps pipelines
 - Github Actions
 
-## Gitversion configuration example
+## What is GitVersion?
 
-TODO: Show my configuration file and what I am doing, say that the sky is the limit and if you want to do it different refer to gitversion official docs
+TODO: short intro into what GitVersion is for people who are not familiar with it.
 
 ## Incrementing the version
 
-GitVersion gives you fine-grained control over version bumping through commit message conventions. Instead of relying solely on branch patterns, you can explicitly mention what kind of version bump you want right in your commit message. When making a commit the message is scanned for specific keywords which will adjust the version accordingly.
+GitVersion gives you fine-grained control over [version bumping][increment-version] through commit message conventions. Instead of relying solely on branch patterns, you can explicitly mention what kind of version bump you want right in your commit message. When making a commit the message is scanned for specific keywords which will adjust the version accordingly.
 
 ### The Magic Keywords
 
@@ -43,15 +45,58 @@ git commit -m "fix: resolve memory leak in data processing +semver: patch"
 git commit -m "docs: update installation guide +semver: none"
 ````
 
-### Our tweaks
+## Gitversion configuration example
 
-When using [our config file](https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml), we've pre-configured some additional behavior that makes trunk-based development even smoother. For example, we sometimes start a release branch where we already know the target version before merging back to main. 
+Gitversion allows you to customize it's behaviour in many ways using a [configuration file][gitversion-config].
+
+Below we'll share [our config file](https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml), which we've pre-configured with some additional behavior that makes trunk-based development even smoother. For example, we sometimes start a release branch where we already know the target version before merging back to main. 
 
 To support this workflow, we've configured the template to recognize version-specific branch names. Meaning, if you create a branch like `release/0.2.0`, GitVersion will automatically set the version to `0.2.0` when that branch merges into main. This means we don`t need to rely on commit message conventions for the version bump.
 
-## Real Project Example
+::: important
+The configuration below requires you to already have an existing semantic tag on your repository when running the first time.
+:::
 
-Below share how we have implemeneted this on different git platforms with examples of using it in projects.
+```yml
+# manually verify with `gitversion (/showconfig)`
+workflow: GitHubFlow/v1
+
+strategies:
+  - MergeMessage
+  - TaggedCommit
+  - TrackReleaseBranches
+  - VersionInBranchName
+branches:
+  main:
+    regex: ^master$|^main$
+    increment: Patch
+    prevent-increment:
+      of-merged-branch: true
+    track-merge-target: false
+    track-merge-message: true
+    is-main-branch: true
+    mode: ContinuousDeployment # also do it here
+  release:
+    # Custom release branch configuration
+    regex: ^release/(?<BranchName>[0-9]+\.[0-9]+\.[0-9]+)$
+    label: ''
+    increment: None
+    prevent-increment:
+      when-current-commit-tagged: true
+      of-merged-branch: true
+    is-release-branch: true
+    mode: ContinuousDeployment # do not use ContinuousDelivery, else it will increment the version with a suffix on each commit.
+    source-branches:
+      - main
+```
+
+This configuration reflects our preferred approach, but you can easily adapt it to meet your specific requirements and workflow needs.
+
+## Integrate GitVersion into your workflow.
+
+TODO: write a quick intro for how we integrate into pipelines
+
+To easily integrate GitVersion into your pipelines we'll be sharing some premade snippets
 
 ### Github
 
@@ -66,9 +111,6 @@ The GitHub marketplace lets us easily share our custom action. Check out the [ac
 
 For Azure DevOps I will share a pipeline Template snippet that you can encorporate into your pipelines after setting it up.
 
-## Reference
-
-- [GitVersion Config File Specification](https://gitversion.net/docs/reference/configuration) - Complete reference for the configuration file.
-- [Version incrementing](https://gitversion.net/docs/reference/version-increments) - learn how to automatically increase the version.
-
+[increment-version]: (https://gitversion.net/docs/reference/version-increments) - learn how to automatically increase the version.
 [gitversion-docs]: (https://gitversion.net/docs)
+[gitversion-config]: (https://gitversion.net/docs/reference/configuration) - Complete reference for the configuration file.
