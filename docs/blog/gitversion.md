@@ -48,7 +48,7 @@ git commit -m "docs: update installation guide +semver: none"
 
 Gitversion allows you to customize it's behaviour in many ways using a [configuration file][gitversion-config].
 
-Below we'll share [our config file](https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml), which we've pre-configured with some additional behavior that makes trunk-based development even smoother. For example, we sometimes start a release branch where we already know the target version before merging back to main. 
+Below we'll share [our config file][gitversion-custom-example], which we've pre-configured with some additional behavior that makes trunk-based development even smoother. For example, we sometimes start a release branch where we already know the target version before merging back to main. 
 
 To support this workflow, we've configured the template to recognize version-specific branch names. Meaning, if you create a branch like `release/0.2.0`, GitVersion will automatically set the version to `0.2.0` when that branch merges into main. This means we don`t need to rely on commit message conventions for the version bump.
 
@@ -117,3 +117,4 @@ For Azure DevOps I will share a pipeline Template snippet that you can encorpora
 [gitversion-docs]: (https://gitversion.net/docs)
 [gitversion-config]: (https://gitversion.net/docs/reference/configuration)
 [gitversion-custom-action-repo]: (https://github.com/michielvha/gitversion-tag-action/tree/main)
+[gitversion-custom-example]: (https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml)
