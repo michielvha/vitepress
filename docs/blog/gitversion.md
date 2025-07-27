@@ -113,8 +113,8 @@ The GitHub marketplace lets us easily share our custom action. Check out the [ac
 For Azure DevOps I will share a pipeline Template snippet that you can encorporate into your pipelines after setting it up.
 
 
-[increment-version]: (https://gitversion.net/docs/reference/version-increments)
-[gitversion-docs]: (https://gitversion.net/docs)
-[gitversion-config]: (https://gitversion.net/docs/reference/configuration)
-[gitversion-custom-action-repo]: (https://github.com/michielvha/gitversion-tag-action/tree/main)
-[gitversion-custom-example]: (https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml)
+[increment-version]: https://gitversion.net/docs/reference/version-increments
+[gitversion-docs]: https://gitversion.net/docs
+[gitversion-config]: https://gitversion.net/docs/reference/configuration
+[gitversion-custom-action-repo]: https://github.com/michielvha/gitversion-tag-action/tree/main
+[gitversion-custom-example]: https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml
