@@ -2,7 +2,7 @@
 
 **Under Construction**
 
-Every project needs a solid versioning strategy. I’ve been using GitVersion for a while now to keep things consistent across the board. In this post, I’ll walk you through how I’ve hooked it into both GitHub and Azure DevOps, so you can easily drop it into your setup.
+Every project needs a solid versioning strategy. I’ve been using [GitVersion][gitversion-docs] for a while now to keep things consistent across the board. In this post, I’ll walk you through how I’ve hooked it into both GitHub and Azure DevOps, so you can easily drop it into your setup.
 
 ## Techstack
 
@@ -16,9 +16,7 @@ TODO: Show my configuration file and what I am doing, say that the sky is the li
 
 ## Incrementing the version
 
-GitVersion gives you fine-grained control over version bumping through commit message conventions. Instead of relying solely on branch patterns, you can explicitly tell GitVersion what kind of version bump you want right in your commit message.
-
-Here's how it works: GitVersion scans your commit messages for specific keywords and adjusts the version accordingly. No more guessing games about whether your change should bump the patch, minor, or major version.
+GitVersion gives you fine-grained control over version bumping through commit message conventions. Instead of relying solely on branch patterns, you can explicitly mention what kind of version bump you want right in your commit message. When making a commit the message is scanned for specific keywords which will adjust the version accordingly.
 
 ### The Magic Keywords
 
@@ -57,7 +55,7 @@ Below share how we have implemeneted this on different git platforms with exampl
 
 ### Github
 
-The GitHub marketplace lets us easily share our custom action. Check out the [action repo](https://github.com/michielvha/gitversion-tag-action/tree/main) to see how to use GitVersion on GitHub, feel free to fork or clone this action and tweak it to your needs. It's built to serve as a solid foundation for anyone to build on.
+The GitHub marketplace lets us easily share our custom action. Check out the [action repo](https://github.com/michielvha/gitversion-tag-action/tree/main) to see how to use GitVersion with GitHub actions, feel free to fork or clone this action and tweak it to your needs. It's built to serve as a solid foundation for anyone to build on.
 
 **features:**
 - Tags the repo with the calculated `SemVer` and output the value for usage in subsequent steps.
@@ -70,6 +68,7 @@ For Azure DevOps I will share a pipeline Template snippet that you can encorpora
 
 ## Reference
 
-- [GitVersion Official Documentation](https://gitversion.net/docs)
 - [GitVersion Config File Specification](https://gitversion.net/docs/reference/configuration) - Complete reference for the configuration file.
 - [Version incrementing](https://gitversion.net/docs/reference/version-increments) - learn how to automatically increase the version.
+
+[gitversion-docs]: (https://gitversion.net/docs)
