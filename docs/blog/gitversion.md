@@ -12,8 +12,12 @@ The following technologies are describes in this article:
 
 ## What is GitVersion?
 
-**Section Under Construction**
-TODO: short intro into what GitVersion is for people who are not familiar with it.
+GitVersion is an open-source tool that automatically calculates semantic version numbers for your project based on your Git history. Instead of manually deciding what version number to use for each release, GitVersion analyzes your branch structure, commit messages, and tags to determine the appropriate version increment.
+
+Think of it as your versioning autopilot. It follows [semantic versioning][semantic-version] (SemVer) principles, where versions follow the `MAJOR.MINOR.PATCH` format:
+- **MAJOR** version for breaking changes that aren't backward compatible
+- **MINOR** version for new features that maintain backward compatibility  
+- **PATCH** version for bug fixes and small improvements
 
 ## Incrementing the version
 
@@ -28,7 +32,7 @@ GitVersion recognizes these patterns in your commit messages:
 - `+semver: patch` or `+semver: fix` - Bumps the patch version (1.0.0 → 1.0.1)
 - `+semver: none` or `+semver: skip` - No version bump at all
 
-Here's how we use these in practice:
+Here's how you could use these in practice:
 
 ````bash
 # Breaking changes
@@ -44,7 +48,7 @@ git commit -m "fix: resolve memory leak in data processing +semver: patch"
 git commit -m "docs: update installation guide +semver: none"
 ````
 
-## Gitversion configuration example
+## Configuration example
 
 Gitversion allows you to customize it's behaviour in many ways using a [configuration file][gitversion-config].
 
@@ -93,11 +97,9 @@ This configuration reflects our preferred approach, but you can easily adapt it 
 
 ## Integrate GitVersion into your workflow.
 
-**Section Under Construction**
+GitVersion integrates seamlessly into CI/CD pipelines, ensuring consistent versioning across different environments and teams. It eliminates the guesswork and human error that often comes with manual version management.
 
-TODO: write a quick intro for how we integrate into pipelines
-
-To easily integrate GitVersion into your pipelines we'll be sharing some premade snippets
+In this section we will show you how we integrated GitVersion into `Github Actions` and `Azure DevOps Pipelines`.
 
 ### Github
 
@@ -118,3 +120,4 @@ For Azure DevOps I will share a pipeline Template snippet that you can encorpora
 [gitversion-config]: https://gitversion.net/docs/reference/configuration
 [gitversion-custom-action-repo]: https://github.com/michielvha/gitversion-tag-action/tree/main
 [gitversion-custom-example]: https://github.com/michielvha/gitversion-tag-action/blob/main/gitversion.example.yml
+[semantic-version]: https://semver.org/

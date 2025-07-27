@@ -41,6 +41,12 @@ export default {
             items: [
               { text: 'automate versioning with GitVersion', link: '/blog/gitversion.md' },
             ]
+          },
+          {
+            text: 'kubernetes', link: '/blog/intro/kubernetes.md',
+            items: [
+              { text: 'Troubleshooting Kubernetes', link: '/blog/troubleshooting-kubernetes.md' },
+            ]
           }
         ]
       }
