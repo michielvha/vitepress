@@ -4,9 +4,9 @@ As we all know kubernetes troubleshooting can be rather convoluted and not as st
 
 ## restarting is always a good idea
 
-traditionally fully removing an app from a system was difficult to say the least, with kubernetes it is highly encouraged and often fixes various issues that might not be obvious at first. This is why we always advocated for a proper CD solution like [argocd](https://argo-cd.readthedocs.io/en/stable/) which makes re-applying the app automatic and ensuring proper configuration by using GitOps.
+Traditionally fully removing an app from a system was difficult to say the least, with kubernetes it is highly encouraged and often fixes various issues that might not be obvious at first. This is why we always advocated for a proper CD solution like [argocd](https://argo-cd.readthedocs.io/en/stable/) which makes re-applying the app automatic and ensuring proper configuration by using GitOps.
 
-however, sometimes app components will be stuck in a deleting state, this is almost always due to a finalizer which hasn't been met. These can be notoriously hard to get rid of, the combat this we'll share a snippet below which will always remove any given resource finalizers.
+However, sometimes app components will be stuck in a deleting state, this is almost always due to a finalizer which hasn't been met. These can be notoriously hard to get rid of, the combat this we'll share a snippet below which will always remove any given resource finalizers.
 
 TODO: We'll have to generalise the snippet below to just $resource and $resourceName
 
