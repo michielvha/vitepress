@@ -1,7 +1,5 @@
 # Automated Semantic Versioning Made Easy
 
-**Under Construction**
-
 Every project needs a solid versioning strategy. I’ve been using [GitVersion][gitversion-docs] for a while now to keep things consistent across the board. In this post, I’ll walk you through how I’ve hooked it into both GitHub and Azure DevOps, so you can easily drop it into your setup.
 
 ## Techstack
@@ -14,6 +12,7 @@ The following technologies are describes in this article:
 
 ## What is GitVersion?
 
+**Section Under Construction**
 TODO: short intro into what GitVersion is for people who are not familiar with it.
 
 ## Incrementing the version
@@ -94,13 +93,15 @@ This configuration reflects our preferred approach, but you can easily adapt it 
 
 ## Integrate GitVersion into your workflow.
 
+**Section Under Construction**
+
 TODO: write a quick intro for how we integrate into pipelines
 
 To easily integrate GitVersion into your pipelines we'll be sharing some premade snippets
 
 ### Github
 
-The GitHub marketplace lets us easily share our custom action. Check out the [action repo](https://github.com/michielvha/gitversion-tag-action/tree/main) to see how to use GitVersion with GitHub actions, feel free to fork or clone this action and tweak it to your needs. It's built to serve as a solid foundation for anyone to build on.
+The GitHub marketplace lets us easily share our custom action. Check out the [action repo][gitversion-custom-action-repo] to see how to use GitVersion with GitHub actions, feel free to fork or clone this action and tweak it to your needs. It's built to serve as a solid foundation for anyone to build on.
 
 **features:**
 - Tags the repo with the calculated `SemVer` and output the value for usage in subsequent steps.
@@ -111,6 +112,8 @@ The GitHub marketplace lets us easily share our custom action. Check out the [ac
 
 For Azure DevOps I will share a pipeline Template snippet that you can encorporate into your pipelines after setting it up.
 
-[increment-version]: (https://gitversion.net/docs/reference/version-increments) - learn how to automatically increase the version.
+
+[increment-version]: (https://gitversion.net/docs/reference/version-increments)
 [gitversion-docs]: (https://gitversion.net/docs)
-[gitversion-config]: (https://gitversion.net/docs/reference/configuration) - Complete reference for the configuration file.
+[gitversion-config]: (https://gitversion.net/docs/reference/configuration)
+[gitversion-custom-action-repo]: (https://github.com/michielvha/gitversion-tag-action/tree/main)

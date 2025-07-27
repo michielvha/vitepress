@@ -29,7 +29,18 @@ export default {
       {
         text: 'blog',
         items: [
-          { text: 'EKS - Carrier Grade NAT overlay', link: '/blog/cgnat-overlay-with-eks' },
+          {
+            text: 'aws', link: '/blog/intro/aws.md',
+            items: [
+              { text: 'EKS - Carrier Grade NAT overlay', link: '/blog/cgnat-overlay-with-eks' },
+            ]
+          },
+          {
+            text: 'devops', link: '/blog/intro/devops.md',
+            items: [
+              { text: 'automate versioning with GitVersion', link: '/blog/gitversion.md' },
+            ]
+          }
         ]
       }
     ],
