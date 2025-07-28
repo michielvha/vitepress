@@ -18,12 +18,23 @@ Below are all the topics I have previously investigated that should be turned in
 - RootApps & Kustomize
   - finalizers (cleanup or remove apps when argocd goes down)
   - best practices
+
 - ArgoCD integration with azurekeyvault for auto join - same for when we do the one for AWS.
+
 - Openshift, setup of aro ? custom terraform module could be great to share...
+  
 - the post deployment stuff external secrets with workload identities etc etc
+  
 - Crossplane / Kyverno / ACK etc etc
+  - setup eks pod identity for crossplane
+  - create XRD's
   - delve into platform engineering and the different tools.
+
 - All the pipeline templates of azuredevops and all the custom actions.
-  - Gitversion
-    - Custom action how to use and demo
+  - Gitversion - DONE, just need to create the pipelineTemplates repo
+  
 - usefull K8S debug tips like remove finalizers with force method etc etc.
+
+- Chartfetch and how to use it with kustomize
+
+- AzureAI proxy for prompt diagnostics

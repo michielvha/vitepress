@@ -1,6 +1,6 @@
 # Welcome to our blog
 
-We've decided to share our knowledge with the community through regular blog posts. You'll find content covering a wide range of topics - from edge computing top cloud native concepts, GitOps and platform engineering practices.
+We've decided to share our knowledge with the community through regular blog posts. You'll find content covering a wide range of topics - from edge computing to cloud native concepts, GitOps and platform engineering practices.
 
 Our goal is simple: break down complex technical concepts and share real-world experiences that might help you in your own projects. Whether you're just getting started or looking to dive deeper into specific technologies, we hope you'll find something useful here.
 
