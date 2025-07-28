@@ -1,9 +1,6 @@
 # Introduction
 
-Welcome to the **EdgeForge** documentation
-
-Here you can find detailed information about all our endevours.
-
+These docs brings together all the moving parts of **Edgeforge**. You can find details on projects, integrations, tools, and ideas built around the edge-native paradigm.
 
 ## Sections
 
