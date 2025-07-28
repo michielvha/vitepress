@@ -37,6 +37,12 @@ export default {
             ]
           },
           {
+            text: 'azure', link: '/blog/intro/azure.md',
+            items: [
+              { text: 'Azure AI Proxy', link: '/blog/azure-ai-proxy.md' },
+            ]
+          },
+          {
             text: 'devops', link: '/blog/intro/devops.md',
             items: [
               { text: 'automate versioning with GitVersion', link: '/blog/gitversion.md' },
