@@ -1,16 +1,16 @@
 # Troubleshooting Kubernetes
 
-As we all know kubernetes troubleshooting can be rather convoluted and not as straight forward as debugging a traditional system. This is probably due to the many layers of abstraction taking away from understanding the core concepts. In this article we'll be sharing some usefull tips and tricks to help you solve issues quicker.
+As we all know Kubernetes troubleshooting can be rather convoluted when compared to debugging a traditional system. This is probably due to the many layers of abstraction that make it harder to understand the core concepts. In this article we'll be sharing some useful tips and tricks to help you solve issues quicker.
 
-## restarting is always a good idea
+## Restarting is always a good idea
 
-Traditionally fully removing an app from a system was difficult to say the least, with kubernetes it is highly encouraged and often fixes various issues that might not be obvious at first. This is why we always advocated for a proper CD solution like [argocd](https://argo-cd.readthedocs.io/en/stable/) which makes re-applying the app automatic and ensuring proper configuration by using GitOps.
+While completely removing an app from a traditional system was difficult to say the least, with Kubernetes it's super easy and highly encouraged because it often fixes various issues that might not be obvious at first. This is why we always advocated for a proper CD solution like [argocd](https://argo-cd.readthedocs.io/en/stable/) which makes re-applying the app automatic and ensures proper configuration by using GitOps.
 
-However, sometimes app components will be stuck in a deleting state, this is almost always due to a finalizer which hasn't been met. These can be notoriously hard to get rid of, the combat this we'll share a snippet below which will always remove any given resource finalizers.
+However, app components sometimes get stuck in a deleting state. This is almost always due to an unmet finalizer. These can be notoriously hard to get rid of, so to combat this we'll share a snippet below which will always remove any given resource's finalizers.
 
 TODO: We'll have to generalise the snippet below to just $resource and $resourceName
 
-```pwsh
+```powershell
 # Get the specific providerconfig
 $resource = kubectl get providerconfig provider-aws-s3 -o json | ConvertFrom-Json
 

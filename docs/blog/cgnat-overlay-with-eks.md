@@ -13,7 +13,7 @@ It sticks your pods behind a NAT in a secondary CIDR block, freeing up your main
 
 ### Carrier-grade NAT ?
 
-In AWS, [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) mode refers to assigning pod IPs from a secondary CIDR behind NAT, typically from the 100.64.0.0/10 range used by ISPs for large-scale private networking. This keeps your main subnets free and avoids IP exhaustion.
+A [CGNAT overlay](https://docs.aws.amazon.com/eks/latest/best-practices/custom-networking.html) refers to assigning pod IPs from a secondary CIDR behind NAT, typically from the 100.64.0.0/10 range used by ISPs for large-scale private networking. This keeps your main subnets free and avoids IP exhaustion.
 
 ## VPC CIDR Config
 
