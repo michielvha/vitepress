@@ -2,7 +2,7 @@
 
 For some reason, Azure diagnostic settings don’t currently provide any insight into prompts and their responses. Microsoft suggests setting up APIM as a proxy, but that leads to vendor lock-in and requires configuring Event Hubs if you want to connect everything to a monitoring solution like ElasticSearch. To avoid all that complexity and stay cloud-agnostic, We’ve written a simple transparent proxy that captures these details. You can run it as a sidecar next to a Filebeat pod for easy monitoring. This solution is completely open-source and we welcome any contributions.
 
-## how to use / integrate
+## Quick Start & Integration Guide
 
 This software is designed to run as a container, needing just a handful of environment variables for setup. It’s simple to deploy alongside any data shipper, or run it as a standalone service
 
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: filebeat
-        image: filebeat
+        image: elastic/filebeat
         args: [
           "-c", "/usr/share/filebeat/filebeat.yml",
           "-e",
@@ -34,8 +34,9 @@ spec:
             mountPath: /usr/share/filebeat/filebeat.yml
             readOnly: true
             subPath: filebeat.yml
+            
       - name:  azure-ai-proxy
-        image: azure-ai-proxy
+        image: edgeforge/azure-ai-proxy
         env:
         - name: AZURE_OPENAI_ENDPOINT
           value: "https://openai-prd.openai.azure.com/"
@@ -53,7 +54,7 @@ spec:
             name: filebeat-config
 ```
 
-you'll need to define a `filebeat-config` ConfigMap for this to work, I'll provide a minimal example the authentication etc you'll have to fill in yourself.
+You'll need to define a `filebeat-config` ConfigMap for this setup. Below is a minimal example, you'll need to add your own authentication and other required settings.
 
 ```yaml
 ...
@@ -76,7 +77,7 @@ filebeat.inputs:
 
 ### Example Docker compose
 
-For non production workloads docker compose can be great to just get the service up and running to try it out.
+For non-production workloads, Docker Compose is a convenient way to quickly get the service up and running for testing or evaluation.
 
 ```yaml
 services:
@@ -95,7 +96,7 @@ volumes:
 
 ## Improvements?
 
-If you or your company are interested in using this solution but feel like you are missing some kind of feature feel free to contact us directly or create an issue on github.
+If you or your company are interested in this solution but need additional features, feel free to contact us directly or open an issue on GitHub.
 
 
 [proxy]: https://github.com/michielvha/azure-ai-proxy
