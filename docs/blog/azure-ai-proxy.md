@@ -4,7 +4,7 @@ For some reason, Azure diagnostic settings don’t currently provide any insight
 
 ## how to use / integrate
 
-This software was made to run as a container requiring only a few environment variables to get it setup. Making it easy to run along side any data shipper or as a standalone service.
+This software is designed to run as a container, needing just a handful of environment variables for setup. It’s simple to deploy alongside any data shipper, or run it as a standalone service
 
 ### Example K8S Configuration
 
