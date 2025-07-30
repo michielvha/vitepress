@@ -33,7 +33,8 @@ export default {
           {
             text: 'aws', link: '/blog/intro/aws.md',
             items: [
-              { text: 'EKS - Carrier Grade NAT overlay', link: '/blog/cgnat-overlay-with-eks' },
+              { text: 'EKS - Carrier Grade NAT overlay', link: '/blog/aws/cgnat-overlay-with-eks' },
+              { text: 'Crossplane with EKS Pod Identity', link: '/blog/aws/crossplane-with-eks-pod-identity' },
             ]
           },
           {
@@ -48,12 +49,12 @@ export default {
               { text: 'automate versioning with GitVersion', link: '/blog/gitversion.md' },
             ]
           },
-          {
-            text: 'kubernetes', link: '/blog/intro/kubernetes.md',
-            items: [
-              { text: 'Troubleshooting Kubernetes', link: '/blog/troubleshooting-kubernetes.md' },
-            ]
-          }
+          // {
+          //   text: 'kubernetes', link: '/blog/intro/kubernetes.md',
+          //   items: [
+          //     { text: 'Troubleshooting Kubernetes', link: '/blog/troubleshooting-kubernetes.md' },
+          //   ]
+          // }
         ]
       }
     ],
