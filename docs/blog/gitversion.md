@@ -56,7 +56,7 @@ Below we'll share our [config file][gitversion-custom-example], which we've pre-
 
 To support this workflow, we've configured the template to recognize version-specific branch names. Meaning, if you create a branch like `release/0.2.0`, GitVersion will automatically set the version to `0.2.0` when that branch merges into main. This means we don`t need to rely on commit message conventions for the version bump.
 
-::: important
+::: tip
 The configuration below requires you to already have an existing semantic tag on your repository when running the first time.
 :::
 
