@@ -9,4 +9,4 @@ These docs brings together all the moving parts of **Edgeforge**. You can find d
 - **edgecloud** – A scalable edge-cloud platform designed for small form factor devices like SBCs. It's about bringing cloud-native patterns to the edge in a way that feels simple and powerful. -->
 
 - **blogs** – This section contains all our blog posts. The topics span from edge solutions to cloud native architecture.
-    - [**CGNAT for EKS clusters**](../blog/cgnat-overlay-with-eks.md) - Complete guide for implementing a CGNAT overlay on an EKS Cluster, thus saving space in your main subnet. This is comparable to using azure-cni in overlay mode on AKS
+    - [**CGNAT for EKS clusters**](../blog/aws/cgnat-overlay-with-eks.md) - Complete guide for implementing a CGNAT overlay on an EKS Cluster, thus saving space in your main subnet. This is comparable to using azure-cni in overlay mode on AKS
