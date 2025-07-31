@@ -23,7 +23,7 @@ We'll **add a secondary CIDR block** to an existing VPC to create an overlay net
 
 Search for VPC -> Select VPC -> Actions -> Edit CIDRs, then add a new IPv4 CIDR.
 
-![img_2.png](img/portal1.png)
+![img_2.png](../img/portal1.png)
 
 In our case, we cannot use the standard `100.64.0.0/10` range because we are restricted to using CIDR blocks between `/16` and `/28`, so we'll settle for `100.64.0.0/16`.
 
