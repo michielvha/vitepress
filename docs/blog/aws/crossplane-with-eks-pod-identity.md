@@ -46,7 +46,7 @@ Do not create the provider before the pod association is created, otherwise the 
       package: xpkg.upbound.io/upbound/provider-family-aws:v1
     ````
 
-2. Create `DeploymentRuntimeConfig` for the provider, which will specify the service account name to use. This one should match the one used in the Terraform configuration above.
+2. Create the `DeploymentRuntimeConfig` for the provider, which will specify the service account name to use. This service account should match the one used in the Terraform configuration above.
 
     ````yaml
     apiVersion: pkg.crossplane.io/v1beta1
@@ -60,7 +60,7 @@ Do not create the provider before the pod association is created, otherwise the 
           name: provider-aws-s3
     ````
 
-3. Then we create the aws s3 `Provider` & `ProviderConfig` for the provider, which will specify the service account name to use.
+3. Then we create the aws s3 `Provider` & `ProviderConfig` for the provider, which will reference the `DeploymentRuntimeConfig`.
 
     ````yaml
     apiVersion: pkg.crossplane.io/v1
