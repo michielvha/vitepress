@@ -8,6 +8,8 @@ This guide describes the the end-to-end integration for an Automated Cluster Onb
 
 ## Architecture
 
+TODO: edit the reference docs into proper structure for blog and regenerate the image.
+
 ![Assets](../../../assets/argocd.png)
 
 # 1. Store Secrets in Azure Key Vault using Terraform Module Outputs
@@ -16,7 +18,7 @@ This guide describes the the end-to-end integration for an Automated Cluster Onb
 
 This section of the document explains how to dynamically store specific values during the creation of AKS cluster in ``Azure Key Vault`` as secrets. These values will be used in later steps, especially in automating the onboarding / integration of new clusters into ``ArgoCD``. To achieve this, the Terraform module will output two essential values from the AKS cluster, which are then stored securely in Azure Key Vault.
 
-:::info
+::: info
 The Terraform identity handles the creation of secrets in the Key Vault, it is assumed this identity has the rights to perform actions on keyvault.
 :::
 
@@ -26,7 +28,7 @@ The code below generates outputs for:
 1. `cluster_ca_certificate`: The certificate authority (CA) certificate for the AKS cluster.
 2. `aks_cluster_api_server_url`: The API server URL for accessing the AKS cluster.
 
-These outputs are then passed as secrets in [1.2.1](#111-output-values) to Azure Key Vault, which securely stores them for future use. [Later on](#311-base-clusters) we will use them in creating a secret in our tooling hub cluster that ArgoCD can recognize and automatically pick up. 
+These outputs are then passed as secrets in [1.2.1](#111-output-values) to Azure Key Vault, which securely stores them for future use. [Later on](#311-base-clusters) we will use them in creating a secret in our ArgoCD cluster which will be recognize and automatically pick up. 
 
 ### 1.1.1 output values
 
@@ -42,7 +44,8 @@ output "aks_cluster_api_server_url" {
 
 ## 1.2 Usage - Saving Outputs as Key Vault Secrets
 
-When creating an AKS cluster via the module, we must create 2 secret resources to store these two values in the Key Vault instance named `localfoundation-prd`. This will facilitate secure auto-joining by ArgoCD or other applications that require these credentials.
+When creating an AKS cluster, we must create 2 secret resources to store these two values in a Key Vault instance. 
+These will later be used by ArgoCD to facilitate secure auto-joining.
 
 ### 1.2.1 create terraform resources
 
@@ -50,36 +53,28 @@ The secrets stored are:
 - **CA Certificate**: A unique certificate for validating cluster identity. using naming convention ``${module.aks.cluster_name}-ca-cert``
 - **API Server URL**: The URL for accessing the AKS API. Using naming convention ``${module.aks.cluster_name}-server-url``
 
-
 ```hcl
-// Secret creation for auto-joining with ArgoCD
 resource "azurerm_key_vault_secret" "cluster_ca_cert" {
   name         = "${module.aks.cluster_name}-ca-cert"
   value        = module.aks.cluster_ca_certificate
-  key_vault_id = data.azurerm_key_vault.pattoken_key_vault_localfoundation.id
+  key_vault_id = data.azurerm_key_vault.argocd.id
 }
 
 resource "azurerm_key_vault_secret" "cluster_api_server_url" {
   name         = "${module.aks.cluster_name}-server-url"
   value        = module.aks.aks_cluster_api_server_url
-  key_vault_id = data.azurerm_key_vault.pattoken_key_vault_localfoundation.id
+  key_vault_id = data.azurerm_key_vault.argocd.id
 }
 ```
 
-
-Both secrets are stored in the `localfoundation` Key Vault, which must be defined as a data source in your Terraform code to ensure connectivity and permission to create secrets.
+Both secrets are stored in the `argocd` Key Vault, which must be defined as a data source in our Terraform code.
 
 ```hcl
-data "azurerm_key_vault" "pattoken_key_vault_localfoundation" {
-  name                = "localfoundation-prd-akv"
-  resource_group_name = "mslocalfoundationwe-prd-rg"
+data "azurerm_key_vault" "argocd" {
+  name                = "argocd-prd-akv"
+  resource_group_name = "argocd-prd-rg"
 }
 ```
-
-## 1.3 Reference
-- [``terraform-azurerm-aks`` module](https://dev.azure.com/bnl-ms/AzureFoundation/_git/terraform-azurerm-aks)
-- [outputs.tf](https://dev.azure.com/bnl-ms/AzureFoundation/_git/terraform-azurerm-aks?path=/outputs.tf&version=GBmain&line=22&lineEnd=23&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents)
-
 
 # 2. Fetching Secrets with External Secrets Operator (ESO)
 
@@ -89,28 +84,27 @@ This section outlines the configuration needed to enable the External Secrets Op
 
 ## 2.1 Overview of External Secrets Operator (ESO)
 
-The **External Secrets Operator** (ESO) is the preferred method for securely fetching secrets in our environment. While some legacy setups may use the CSI Driver, ESO is the standard approach going forward. Notably, ESO is deployed as part of the post-deployment process, so during the initial setup of ArgoCD, ESO is assumed to be unavailable. This is why we use two SecretProviderClass resources: `argocd-oidc-secret-class` and `argocd-tls-secret-class`, which provide essential secrets for ArgoCD without requiring ESO.
+The **External Secrets Operator** (ESO) is the preferred method for securely fetching secrets in our environment.
 
 > **Why use External Secrets Operator?**  
 > ESO allows for the creation of Kubernetes Secret objects, making secrets readily accessible to applications without mounting them directly into containers. This approach enhances security and simplifies secret management.
 
 ## 2.2 Setup - Setting Up the External Secrets Operator (ESO)
 
-The **External Secrets Operator (ESO)** is a key component of the [post-deployment configuration](https://dev.azure.com/bnl-ms/AzureFoundation/_git/K8SResources?path=/manifests/post-deployment-app/base/external-secrets/kustomization.yaml), ensuring it is available immediately after the cluster's initial setup is completed.
+The **External Secrets Operator (ESO)** is a key component of any cluster setup, we advise adding it to a postdeployment configuration step. This ensures that the operator is installed after the cluster's initial setup, allowing it to fetch secrets from Azure Key Vault and create Kubernetes Secret objects as needed.
 
-ESO is deployed using the official Helm chart with minimal customization. The primary modification involves adding a pull secret to enable the use of the JFrog Artifactory as a proxy for the GitHub Container Registry (GHCR). The `Default` namespace is used.
+You can find how we deploy the ESO in our [Kubernetes resource](https://github.com/edgeforge/k8s-resources) repository. 
 
 ## 2.3 Setting Up SecretStore with Workload Identity
 
 > **Why use Workload Identity?**  
 > Workload Identity is preferred due to its native integration with the platform, eliminating the need for secret rotation while enhancing security.
 
+https://external-secrets.io/v0.5.1/provider-azure-key-vault/#workload-identity
+
 ### 2.3.1 Configuring Workload Identity Federation with Terraform
 
 When bootstrapping a cluster, the Terraform module includes a configuration to set up Workload Identity. This process involves defining User Managed Identities (UMIs) and establishing federated credentials, enabling Workload Identity Federation for secure access to Azure Key Vault secrets.
-
-> [!IMPORTANT]
-> The examples used below are core to our integration. Every cluster needs to have this configured.
 
 #### Example Configuration: `iam.tf` - Federated Credentials
 
